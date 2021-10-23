@@ -1,0 +1,130 @@
+{%extends 'base.html'%}
+{% block title%}{{post.title}}{% endblock %}
+      {% block content%}
+{% load static %}
+{%load humanize%}
+
+
+    </header>
+    <section class="hero-home dark-overlay mb-5"><img class="bg-image" src="/media/{{post.img}}" alt="">
+      <div class="container py-7">
+        <div class="overlay-content text-center text-white">
+          <h1 class="display-3  font-weight-bold text-shadow mb-0">{{post.title}}</h1>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+
+
+           </a> Written by <a class="font-weight-bold" href="#">{{post.author}}</a><span class="mx-1">|</span> {{post.add_date}}<span class="mx-1">|</span></p>
+
+        </div>
+        <div class="container">
+        {{post.content|safe}}
+            </div>
+        <div class="row">
+          <div class="col-xl-10 mx-auto"><img class="img-fluid mb-5" src="../../../d19m59y37dris4.cloudfront.net/directory/1-6-1/img/photo/photo-1471189641895-16c58a695bcb.jpg" alt=""></div>
+        </div>
+
+              <!-- /comment-->
+              <!-- comment-->
+
+              <!-- /comment-->
+            </div>
+            <!-- /comments-->
+            <!-- comment form-->
+
+            <!-- /comment form-->
+          </div>
+        </div>
+      </div>
+    </section>
+<div class="container">
+    <h2>Comments({{comments.count}})</h2>
+    {% if user.is_authenticated%}
+    <form method="post" action="/postComment/">
+         {% csrf_token %}
+
+        <label for="comment">Post Comment</label>
+        <input type="text" id="comment"class="form-control" name="comment" placeholder="Enter Comment Here" required>
+        <input type="hidden" name="sno" value="{{post.post_id}}" >
+        <input type="submit" name="Submit" value="Sumbit"  class="btn btn-warning my-2">
+        </form>
+    {%else%}
+    <h4>Login to post a Comment</h4>
+    {%endif%}
+    {%for comment in comments%}
+    <div class="row">
+        <div class="col-md-1">
+            <img class="rounded mx-auto d-block w-100 " style="border:0.5px solid black;" src="{% static '/img/man.png'%}">
+        </div>
+        <div class="col-md-11">
+            <strong>{{comment.user.first_name}} {{comment.user.last_name}}</strong> at <span class="badge badge-secondary">{{comment.timestamp | naturaltime}}</span>
+             <div>{{comment.comment}}</div>
+
+
+        </div>
+    </div>
+    <br>
+    {%endfor%}
+
+</div>
+    <!-- Footer-->
+    <footer class="position-relative z-index-10 d-print-none">
+      <!-- Main block - menus, subscribe form-->
+
+      <!-- Copyright section of the footer-->
+
+    </footer>
+
+    <!-- JavaScript files-->
+    <script>
+      // ------------------------------------------------------- //
+      //   Inject SVG Sprite -
+      //   see more here
+      //   https://css-tricks.com/ajaxing-svg-sprite/
+      // ------------------------------------------------------ //
+      function injectSvgSprite(path) {
+
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET.html", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+          var div = document.createElement("div");
+          div.className = 'd-none';
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }
+      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
+      // use your own URL in production, please :)
+      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
+      //- injectSvgSprite('${path}icons/orion-svg-sprite.69651a96.svg');
+      injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
+
+    </script>
+    <!-- jQuery-->
+    <script src="../../../d19m59y37dris4.cloudfront.net/directory/1-6-1/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
+    <script src="../../../d19m59y37dris4.cloudfront.net/directory/1-6-1/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Magnific Popup - Lightbox for the gallery-->
+    <script src="../../../d19m59y37dris4.cloudfront.net/directory/1-6-1/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <!-- Smooth scroll-->
+    <script src="../../../d19m59y37dris4.cloudfront.net/directory/1-6-1/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
+    <!-- Bootstrap Select-->
+    <script src="../../../d19m59y37dris4.cloudfront.net/directory/1-6-1/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
+    <script src="../../../d19m59y37dris4.cloudfront.net/directory/1-6-1/vendor/object-fit-images/ofi.min.js"></script>
+    <!-- Swiper Carousel                       -->
+    <script src="../../../cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
+    <script src="../../../d19m59y37dris4.cloudfront.net/directory/1-6-1/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="js/demo.36f8799a.js"></script>
+    <script>var basePath = ''</script>
+    <!-- Main Theme JS file    -->
+    <script src="js/theme.55f8348b.js"></script>
+  </body>
+
+<!-- Mirrored from demo.bootstrapious.com/directory/1-6-1/post.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 17 Apr 2021 09:21:32 GMT -->
+</html>
+{% endblock %}
